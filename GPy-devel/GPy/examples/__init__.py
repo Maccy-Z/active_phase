@@ -9,7 +9,7 @@ you have that installed before running examples. The easiest way to do this is t
 
 The examples are executable and self-contained workflows in that they have their own source data, create their own models, kernels and other objects as needed, execute optimisation as required, and display output.
 
-Viewing the source code of each model will clarify the steps taken in its execution, and may provide inspiration for developing of user-specific applications of `GPy`.
+Viewing the source my_code of each model will clarify the steps taken in its execution, and may provide inspiration for developing of user-specific applications of `GPy`.
 
 """
 from . import classification

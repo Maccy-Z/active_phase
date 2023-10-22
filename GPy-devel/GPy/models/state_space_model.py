@@ -136,7 +136,7 @@ class StateSpace(Model):
 
         kalman_filter_type = self.kalman_filter_type
 
-        # The following code is required because sometimes the shapes of self.Y
+        # The following my_code is required because sometimes the shapes of self.Y
         # becomes 3D even though is must be 2D. The reason is undiscovered.
         Y = self.Y
         if self.ts_number is None:

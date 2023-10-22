@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Contains some cython code for state space modelling.
+Contains some cython my_code for state space modelling.
 """
 import numpy as np
 cimport numpy as np

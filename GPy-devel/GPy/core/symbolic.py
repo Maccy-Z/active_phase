@@ -51,7 +51,7 @@ class Symbolic_core():
         self.global_stabilize()
 
         # Helper functions to get data in and out of dictionaries.
-        # this code from http://stackoverflow.com/questions/14692690/access-python-nested-dictionary-items-via-a-list-of-keys
+        # this my_code from http://stackoverflow.com/questions/14692690/access-python-nested-dictionary-items-via-a-list-of-keys
 
         self.extract_sub_expressions()
         self._gen_code()
@@ -238,12 +238,12 @@ class Symbolic_core():
         return lcode
 
     def stabilize(self, expr):
-        """Stabilize the code in the model."""
-        # this code is applied to expressions in the model in an attempt to sabilize them.
+        """Stabilize the my_code in the model."""
+        # this my_code is applied to expressions in the model in an attempt to sabilize them.
         return expr
 
     def global_stabilize(self):
-        """Stabilize all code in the model."""
+        """Stabilize all my_code in the model."""
         pass
 
     def _set_attribute(self, name, value):
@@ -254,7 +254,7 @@ class Symbolic_core():
 
     def update_expression_list(self):
         """Extract a list of expressions from the dictionary of expressions."""
-        self.expression_list = [] # code arrives in dictionary, but is passed in this list
+        self.expression_list = [] # my_code arrives in dictionary, but is passed in this list
         self.expression_keys = [] # Keep track of the dictionary keys.
         self.expression_order = [] # This may be unecessary. It's to give ordering for cse
         for fname, fexpressions in self.expressions.items():
@@ -279,7 +279,7 @@ class Symbolic_core():
                     self.expression_order.append(2) 
 
         # This step may be unecessary.
-        # Not 100% sure if the sub expression elimination is order sensitive. This step orders the list with the 'function' code first and derivatives after.
+        # Not 100% sure if the sub expression elimination is order sensitive. This step orders the list with the 'function' my_code first and derivatives after.
         self.expression_order, self.expression_list, self.expression_keys = zip(*sorted(zip(self.expression_order, self.expression_list, self.expression_keys)))
 
     def extract_sub_expressions(self, cache_prefix='cache', sub_prefix='sub', prefix='XoXoXoX'):
@@ -325,7 +325,7 @@ class Symbolic_core():
             for void, expr in common_sub_expressions:
                 expr = expr.subs(replace, replace_dict[replace.name])
 
-        # Replace original code with code including subexpressions.
+        # Replace original my_code with my_code including subexpressions.
         for keys in self.expression_keys:
             for replace, void in common_sub_expressions:
                 setInDict(self.expressions, keys, getFromDict(self.expressions, keys).subs(replace, replace_dict[replace.name]))
@@ -342,8 +342,8 @@ class Symbolic_core():
             
 
     def _gen_code(self):
-        """Generate code for the list of expressions provided using the common sub-expression eliminator to separate out portions that are computed multiple times."""
-        # This is the dictionary that stores all the generated code.
+        """Generate my_code for the list of expressions provided using the common sub-expression eliminator to separate out portions that are computed multiple times."""
+        # This is the dictionary that stores all the generated my_code.
 
         self.code = {}
         def match_key(expr):
@@ -360,7 +360,7 @@ class Symbolic_core():
                             
  
     def _expr2code(self, arg_list, expr):
-        """Convert the given symbolic expression into code."""
+        """Convert the given symbolic expression into my_code."""
         code = lambdastr(arg_list, expr)
         function_code = code.split(':')[1].strip()
         #for arg in arg_list:
@@ -369,7 +369,7 @@ class Symbolic_core():
         return function_code
 
     def _print_code(self, code):
-        """Prepare code for string writing."""
+        """Prepare my_code for string writing."""
         # This needs a rewrite --- it doesn't check for match clashes! So sub11 would be replaced by sub1 before being replaced with sub11!!
         for key in self.variables.keys():
             for arg in self.variables[key]:

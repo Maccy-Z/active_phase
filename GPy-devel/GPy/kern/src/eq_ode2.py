@@ -30,7 +30,7 @@ class EQ_ODE2(Kern):
     :type B: array of length output_dim.
 
     """
-    #This code will only work for the sparseGP model, due to limitations in models for this kernel
+    #This my_code will only work for the sparseGP model, due to limitations in models for this kernel
     def __init__(self, input_dim=2, output_dim=1, rank=1, W=None, lengthscale=None, C=None, B=None, active_dims=None, name='eq_ode2'):
         #input_dim should be 1, but kern._slice_X is not returning index information required to evaluate kernels        
         assert input_dim == 2, "only defined for 1 input dims"

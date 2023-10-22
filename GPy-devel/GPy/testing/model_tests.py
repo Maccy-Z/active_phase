@@ -558,7 +558,7 @@ class MiscTests(unittest.TestCase):
         """
         A test replicating the cubic sine regression problem from
         Snelson's paper. This test doesn't have any assertions, it's
-        just to ensure coverage of the tanh warping function code.
+        just to ensure coverage of the tanh warping function my_code.
         """
         X = (2 * np.pi) * np.random.random(151) - np.pi
         Y = np.sin(X) + np.random.normal(0,0.2,151)

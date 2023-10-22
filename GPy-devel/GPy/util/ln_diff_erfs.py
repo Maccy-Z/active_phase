@@ -13,7 +13,7 @@ def ln_diff_erfs(x1, x2, return_sign=False):
     :type x2: ndarray
     :return: tuple containing (log(abs(erf(x1) - erf(x2))), sign(erf(x1) - erf(x2)))
 
-    Based on MATLAB code that was written by Antti Honkela and modified by David Luengo and originally derived from code by Neil Lawrence.
+    Based on MATLAB my_code that was written by Antti Honkela and modified by David Luengo and originally derived from my_code by Neil Lawrence.
     """
     x1 = np.require(x1).real
     x2 = np.require(x2).real

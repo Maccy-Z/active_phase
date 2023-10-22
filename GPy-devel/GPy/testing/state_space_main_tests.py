@@ -315,7 +315,7 @@ class StateSpaceKernelsTests(np.testing.TestCase):
         """
         np.random.seed(235) # seed the random number generator
     
-        A = 1.0 # For cython code to run properly need float input
+        A = 1.0 # For cython my_code to run properly need float input
         H = 1.0
         Q = 1.0        
         R = 1.0

@@ -10,7 +10,7 @@ class QuadTests(np.testing.TestCase):
     """
     test file for checking implementation of gaussian-kronrod quadrature.
     we will take a function which can be integrated analytically and check if quadgk result is similar or not!
-    through this file we can test how numerically accurate quadrature implementation in native numpy or manual code is.
+    through this file we can test how numerically accurate quadrature implementation in native numpy or manual my_code is.
     """
     def setUp(self):
         pass

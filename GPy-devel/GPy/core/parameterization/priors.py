@@ -44,7 +44,7 @@ class Gaussian(Prior):
     :param mu: mean
     :param sigma: standard deviation
 
-    .. Note:: Bishop 2006 notation is used throughout the code
+    .. Note:: Bishop 2006 notation is used throughout the my_code
 
     """
     domain = _REAL
@@ -146,7 +146,7 @@ class LogGaussian(Gaussian):
     :param mu: mean
     :param sigma: standard deviation
 
-    .. Note:: Bishop 2006 notation is used throughout the code
+    .. Note:: Bishop 2006 notation is used throughout the my_code
 
     """
     domain = _POSITIVE
@@ -192,7 +192,7 @@ class MultivariateGaussian(Prior):
     :param mu: mean (N-dimensional array)
     :param var: covariance matrix (NxN)
 
-    .. Note:: Bishop 2006 notation is used throughout the code
+    .. Note:: Bishop 2006 notation is used throughout the my_code
 
     """
     domain = _REAL
@@ -282,7 +282,7 @@ class Gamma(Prior):
     :param a: shape parameter
     :param b: rate parameter (warning: it's the *inverse* of the scale)
 
-    .. Note:: Bishop 2006 notation is used throughout the code
+    .. Note:: Bishop 2006 notation is used throughout the my_code
 
     """
     domain = _POSITIVE
@@ -366,7 +366,7 @@ class InverseGamma(Gamma):
     :param a: shape parameter
     :param b: rate parameter (warning: it's the *inverse* of the scale)
 
-    .. Note:: Bishop 2006 notation is used throughout the code
+    .. Note:: Bishop 2006 notation is used throughout the my_code
 
     """
     domain = _POSITIVE
@@ -1342,7 +1342,7 @@ class StudentT(Prior):
     :param sigma: standard deviation
     :param nu: degrees of freedom
 
-    .. Note:: Bishop 2006 notation is used throughout the code
+    .. Note:: Bishop 2006 notation is used throughout the my_code
 
     """
     domain = _REAL

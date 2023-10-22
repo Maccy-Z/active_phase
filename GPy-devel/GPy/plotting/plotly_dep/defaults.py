@@ -5,7 +5,7 @@
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #
-# * Redistributions of source code must retain the above copyright notice, this
+# * Redistributions of source my_code must retain the above copyright notice, this
 #   list of conditions and the following disclaimer.
 #
 # * Redistributions in binary form must reproduce the above copyright notice,
@@ -38,7 +38,7 @@ Create a kwargs dictionary with the right name for the plotting function
 you are implementing. If you do not provide defaults, the default behaviour of
 the plotting library will be used.
 
-In the code, always ise plotting.gpy_plots.defaults to get the defaults, as
+In the my_code, always ise plotting.gpy_plots.defaults to get the defaults, as
 it gives back an empty default, when defaults are not defined.
 '''
 

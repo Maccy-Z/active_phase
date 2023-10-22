@@ -2422,7 +2422,7 @@ class ContDescrStateSpace(DescreteStateSpace):
             """
             Function inverts Q matrix and regularizes the inverse.
             Regularization is useful when original matrix is badly conditioned.
-            Function is currently used only in SparseGP code.
+            Function is currently used only in SparseGP my_code.
             
             Inputs:
             ------------------------------
@@ -2596,7 +2596,7 @@ class ContDescrStateSpace(DescreteStateSpace):
             """
             Function inverts Q matrix and regularizes the inverse.
             Regularization is useful when original matrix is badly conditioned.
-            Function is currently used only in SparseGP code.
+            Function is currently used only in SparseGP my_code.
             
             Inputs:
             ------------------------------

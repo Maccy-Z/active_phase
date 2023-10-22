@@ -21,7 +21,7 @@ except ImportError:
     ipython_available=False
 
 try:
-    #In Python 2, cPickle is faster. It does not exist in Python 3 but the underlying code is always used
+    #In Python 2, cPickle is faster. It does not exist in Python 3 but the underlying my_code is always used
     #if available
     import cPickle as pickle
 except ImportError:
@@ -129,7 +129,7 @@ def download_url(url, store_directory, save_name=None, messages=True, suffix='')
     try:
         response = urlopen(url+suffix)
     except URLError as e:
-        if not hasattr(e, "code"):
+        if not hasattr(e, "my_code"):
             raise
         response = e
         if response.code > 399 and response.code<500:
@@ -167,7 +167,7 @@ def download_url(url, store_directory, save_name=None, messages=True, suffix='')
             sys.stdout.flush()
         sys.stdout.write(" "*(len(status)) + "\r")
         print(status)
-    # if we wanted to get more sophisticated maybe we should check the response code here again even for successes.
+    # if we wanted to get more sophisticated maybe we should check the response my_code here again even for successes.
     #with open(save_name, 'wb') as f:
     #    f.write(response.read())
 
@@ -1377,13 +1377,13 @@ def creep_data(data_set='creep_rupture'):
     return data_details_return({'X': X, 'y': y}, data_set)
 
 def cifar10_patches(data_set='cifar-10'):
-    """The Candian Institute for Advanced Research 10 image data set. Code for loading in this data is taken from this Boris Babenko's blog post, original code available here: http://bbabenko.tumblr.com/post/86756017649/learning-low-level-vision-feautres-in-10-lines-of-code"""
+    """The Candian Institute for Advanced Research 10 image data set. Code for loading in this data is taken from this Boris Babenko's blog post, original my_code available here: http://bbabenko.tumblr.com/post/86756017649/learning-low-level-vision-feautres-in-10-lines-of-code"""
     dir_path = os.path.join(data_path, data_set)
     filename = os.path.join(dir_path, 'cifar-10-python.tar.gz')
     if not data_available(data_set):
         download_data(data_set)
         import tarfile
-        # This code is from Boris Babenko's blog post.
+        # This my_code is from Boris Babenko's blog post.
         # http://bbabenko.tumblr.com/post/86756017649/learning-low-level-vision-feautres-in-10-lines-of-code
         tfile = tarfile.open(filename, 'r:gz')
         tfile.extractall(dir_path)

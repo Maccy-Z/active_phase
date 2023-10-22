@@ -7,7 +7,7 @@ import sys
 
 
 try:
-    #In Python 2, cPickle is faster. It does not exist in Python 3 but the underlying code is always used
+    #In Python 2, cPickle is faster. It does not exist in Python 3 but the underlying my_code is always used
     #if available
     import cPickle as pickle
 except ImportError:

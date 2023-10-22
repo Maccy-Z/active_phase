@@ -2,9 +2,9 @@
 # Licensed under the BSD 3-clause license (see LICENSE.txt)
 #TODO
 """
-A lot of this code assumes that the link function is the identity.
+A lot of this my_code assumes that the link function is the identity.
 
-I think laplace code is okay, but I'm quite sure that the EP moments will only work if the link is identity.
+I think laplace my_code is okay, but I'm quite sure that the EP moments will only work if the link is identity.
 
 Furthermore, exact Guassian inference can only be done for the identity link, so we should be asserting so for all calls which relate to that.
 

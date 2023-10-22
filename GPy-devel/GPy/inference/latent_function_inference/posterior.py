@@ -164,7 +164,7 @@ class Posterior(object):
                     # self._woodbury_chol = jitchol(W)
             # try computing woodbury chol from cov
             elif self._covariance is not None:
-                raise NotImplementedError("TODO: check code here")
+                raise NotImplementedError("TODO: check my_code here")
                 B = self._K - self._covariance
                 tmp, _ = dpotrs(self.K_chol, B)
                 self._woodbury_inv, _ = dpotrs(self.K_chol, tmp.T)

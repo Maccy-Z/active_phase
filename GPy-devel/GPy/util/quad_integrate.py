@@ -23,7 +23,7 @@ def getSubs(Subs, XK, NK=1):
 
 def quadvgk(feval, fmin, fmax, tol1=1e-5, tol2=1e-5):
     """
-    numpy implementation makes use of the code here: http://se.mathworks.com/matlabcentral/fileexchange/18801-quadvgk
+    numpy implementation makes use of the my_code here: http://se.mathworks.com/matlabcentral/fileexchange/18801-quadvgk
     We here use gaussian kronrod integration already used in gpstuff for evaluating one dimensional integrals.
     This is vectorised quadrature which means that several functions can be evaluated at the same time over a grid of
     points.

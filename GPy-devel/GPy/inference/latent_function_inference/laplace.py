@@ -4,10 +4,10 @@
 #Parts of this file were influenced by the Matlab GPML framework written by
 #Carl Edward Rasmussen & Hannes Nickisch, however all bugs are our own.
 #
-#The GPML code is released under the FreeBSD License.
+#The GPML my_code is released under the FreeBSD License.
 #Copyright (c) 2005-2013 Carl Edward Rasmussen & Hannes Nickisch. All rights reserved.
 #
-#The code and associated documentation is available from
+#The my_code and associated documentation is available from
 #http://gaussianprocess.org/gpml/code.
 
 import numpy as np
@@ -149,7 +149,7 @@ class Laplace(LatentFunctionInference):
         """
         Rasmussen's numerically stable mode finding
         For nomenclature see Rasmussen & Williams 2006
-        Influenced by GPML (BSD) code, all errors are our own
+        Influenced by GPML (BSD) my_code, all errors are our own
 
         :param K: Covariance matrix evaluated at locations X
         :type K: NxD matrix

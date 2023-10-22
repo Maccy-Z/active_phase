@@ -160,7 +160,7 @@ class lvm(matplotlib_show):
     def on_move(self, event):
         if event.inaxes!=self.latent_axes: return
         if self.called and self.move_on:
-            # Call modify code on move
+            # Call modify my_code on move
             self.latent_values[:, self.latent_index[0]]=event.xdata
             self.latent_values[:, self.latent_index[1]]=event.ydata
             self.modify(self.latent_values)
@@ -560,7 +560,7 @@ def data_play(Y, visualizer, frame_rate=30):
 
     This example loads in the CMU mocap database (http://mocap.cs.cmu.edu) subject number 35 motion number 01. It then plays it using the mocap_show visualize object.
 
-    .. code-block:: python
+    .. my_code-block:: python
 
        data = GPy.util.datasets.cmu_mocap(subject='35', train_motions=['01'])
        Y = data['Y']

@@ -16,7 +16,7 @@ from ..models.bayesian_gplvm_minibatch import BayesianGPLVMMiniBatch
 
 class MRD(BayesianGPLVMMiniBatch):
     """
-    !WARNING: This is bleeding edge code and still in development.
+    !WARNING: This is bleeding edge my_code and still in development.
     Functionality may change fundamentally during development!
 
     Apply MRD to all given datasets Y in Ylist.
@@ -302,7 +302,7 @@ class MRD(BayesianGPLVMMiniBatch):
         """
         M = len(self.bgplvms)
         if views is None:
-            # There are some small modifications needed to make this work for M > 2 (currently the code
+            # There are some small modifications needed to make this work for M > 2 (currently the my_code
             # takes account of this, but it's not right there)
             if M is not 2:
                 raise NotImplementedError("Not implemented for M > 2")

@@ -1,4 +1,4 @@
-#import edit_source_files
+# import edit_source_files
 import GPy
 import numpy as np
 import time
@@ -69,7 +69,6 @@ def dist2(pd1s: np.ndarray, pd2s: np.ndarray, weights=None):
     # n_diagrams, n_points = pd1s.shape
 
     diffs = np.not_equal(pd1s, pd2s)
-
     mean_diffs = np.mean(diffs, axis=1)  # Mean over each phase diagram
 
     if weights is not None:
@@ -153,9 +152,7 @@ def gen_pd_new_point(models: list[GPy.core.GP], x_new, sample_xs, cfg):
             # model = GPy.models.GPRegression(X, phase_i.reshape(-1, 1), kernel, noise_var=cfg.noise_var)
             model = GPy.models.GPClassification(X_new, Y_new, kernel)
 
-
             new_models.append(model)
-
 
         # Sample new phase diagrams, weighted to probability model is observed.
         if cfg.sample_new is None:
@@ -187,7 +184,6 @@ def acquisition(models, new_Xs, cfg):
             mask = points_within_radius(X_dist, new_X, cfg.sample_dist, cfg.unit_extent)
             pd_old_want = pd_old[:, mask]
             X_dist_region = X_dist[mask]
-
         else:
             X_dist_region = X_dist
             pd_old_want = pd_old

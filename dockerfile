@@ -16,6 +16,8 @@ RUN PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install 3.11
 RUN pyenv global 3.11
 
 # Install required python packages
+RUN pip install scikit-learn scikit-image
+RUN pip install paramz six sympy setuptools
 RUN pip install numpy==1.23 matplotlib
 WORKDIR /GPy
 COPY GPy-devel /GPy
@@ -23,12 +25,12 @@ RUN python setup.py install
 ## Install GUI dependency
 RUN apt install libgl1-mesa-glx -y
 RUN apt install libxcb-cursor0 -y
+RUN apt install libdbus-1-dev -y
+RUN apt install -y '^libxcb.*-dev' libx11-xcb-dev libglu1-mesa-dev libxrender-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev
 RUN pip install PyQT5
-RUN pip install scikit-learn scikit-image
-RUN pip install paramz six sympy setuptools
 WORKDIR /mayavi
 COPY mayavi /mayavi
-RUN python setup.py install
+RUN pip install .
 
 # Install Julia
 WORKDIR $HOME
@@ -49,8 +51,6 @@ RUN  git config --global user.name "Your Name"
 RUN git init
 RUN git add .
 RUN git commit -m "Initial commit"
-
-# Install packages
 RUN julia install.jl
 
 

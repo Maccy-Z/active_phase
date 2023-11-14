@@ -126,26 +126,3 @@ function StatsBase.mean_and_var(lik::AbstractLikelihood, fs::AbstractMatrix)
 end
 
 
-
-
-# function predict_f(
-#     model::AbstractGPModel,
-#     X_test::AbstractVector,
-#     cov::Bool=false,
-#     diag::Bool=true,
-# )
-#     return _predict_f(model, X_test; cov, diag)
-# end
-#
-#
-# function predict_y(
-#     model::AbstractGPModel, X_test::AbstractVector)
-#     return predict_y(likelihood(model), only(_predict_f(model, X_test; cov=false)))
-# end
-
-
-# function compute_proba_f(l::AbstractLikelihood, f::AbstractVector{<:Real})
-#     return compute_proba.(l, f)
-# end
-
-

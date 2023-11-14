@@ -10,7 +10,7 @@ function make_sampler(n_samples)
 end
 
 
-function make_GP(X::Matrix{Float64}, y::Vector{Float64}; n_class::Int, init_sigma::Real, init_scale::Real, optimiser::String=nothing)
+function make_GP(X::Matrix{Float64}, y::Vector{Int64}; n_class::Int, init_sigma::Real, init_scale::Real, optimiser::String="nothing")
     #kernel = init_sigma * SqExponentialKernel() ∘ ScaleTransform(init_scale)
     kernel = init_sigma * Matern32Kernel() ∘ ScaleTransform(init_scale)
 
@@ -52,15 +52,6 @@ function train_GP(m::VGP; n_iter::Int)
 
     return (vars, inv_lens)
 end
-
-# function pred_proba(m::VGP, X::Matrix{Float64}; full_cov::Bool, model_cov::Bool, nSamples::Int=100)
-#
-#     # X must be a vector of vectors, not matrix
-#     # X = [row for row in eachrow(X)]
-#
-#     probs, fs = proba_y(m, X, diag=!full_cov, model_cov=model_cov, nSamples=nSamples)
-#     return (probs, fs)
-# end
 
 function pred_proba_sampler(m::VGP, X::Matrix{Float64}; full_cov::Bool, model_cov::Bool, nSamples=100, sampler::FastGP)
 

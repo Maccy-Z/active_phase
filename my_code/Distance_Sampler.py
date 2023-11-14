@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 from matplotlib import axes as Axes
 import numpy as np
 
-from gaussian_sampler import suggest_point, suggest_two_points
+from gaussian_sampler_jl import suggest_point, suggest_two_points
 from utils import ObsHolder, new_save_folder, tri_pd, bin_pd, quad_pd, CustomScalarFormatter
 from config import Config
 
@@ -78,24 +78,28 @@ class DistanceSampler:
         side_length = int(np.sqrt(len(max_probs)))
         max_probs = max_probs.reshape((side_length, side_length))
 
+        # 2d plots require extent as a tuple of 4 numbers
+        extent = self.cfg.extent
+        extent = tuple(element for inner_tuple in extent for element in inner_tuple)
+
+
         # Plot probability of observaion
         self.p_obs_ax.set_title("Error prob (%)")
-        im = self.p_obs_ax.imshow(1 - max_probs, extent=self.cfg.extent,
+        im = self.p_obs_ax.imshow(1 - max_probs, extent=extent,
                                   origin="lower", vmax=1, vmin=0, aspect='auto')
         self._show_cb(im, self.p_obs_ax)
 
         # Plot acquisition function
         self.acq_ax.set_title(f'Acquisition fn')
-        im = self.acq_ax.imshow(avg_dists, extent=self.cfg.extent,
+        im = self.acq_ax.imshow(avg_dists, extent=extent,
                                 origin="lower", aspect='auto')  # , vmin=sec_low)  # Phase diagram
-
         self._show_cb(im, self.acq_ax)
 
         # Plot current phase diagram and next sample point
         X_obs, phase_obs = self.obs_holder.get_og_obs()
         xs_train, ys_train = X_obs[:, 0], X_obs[:, 1]
         self.pd_ax.set_title(f"PD and points")
-        self.pd_ax.imshow(pd_old, extent=self.cfg.extent, origin="lower", aspect='auto')  # Phase diagram
+        self.pd_ax.imshow(pd_old, extent=extent, origin="lower", aspect='auto')  # Phase diagram
         self.pd_ax.scatter(xs_train, ys_train, marker="x", s=30, c=phase_obs, cmap='bwr')  # Existing observations
         self.pd_ax.scatter(first_point[0], first_point[1], s=80, c='tab:orange')  # New observations
         if sec_point is not None:
@@ -114,16 +118,16 @@ class DistanceSampler:
     def single_obs(self):
         self.obs_holder.save()
 
-        new_point, (pd_old, avg_dists, pd_probs), prob_at_point = suggest_point(self.obs_holder, self.cfg)
+        new_point, prob_at_point, (pd_old, avg_dists, pd_probs) = suggest_point(self.obs_holder, self.cfg)
         self.plot(new_point, pd_old, avg_dists, pd_probs)
 
         return new_point, prob_at_point
 
-    def dual_obs(self):
-        first_point, sec_point, (pd_old, avg_dists, pd_probs) = suggest_two_points(self.obs_holder, self.cfg)
-        self.plot(first_point, pd_old, avg_dists, pd_probs, sec_point=sec_point)
-
-        return first_point, sec_point
+    # def dual_obs(self):
+    #     first_point, sec_point, (pd_old, avg_dists, pd_probs) = suggest_two_points(self.obs_holder, self.cfg)
+    #     self.plot(first_point, pd_old, avg_dists, pd_probs, sec_point=sec_point)
+    #
+    #     return first_point, sec_point
 
 
 def main(save_dir):
@@ -134,7 +138,7 @@ def main(save_dir):
 
     # Init observations to start off
     # X_init, _, _ = make_grid(cfg.N_init, cfg.extent)
-    X_init = [[0.0, 1., 2], [0, 1.25, 2.59]]
+    X_init = [[0.0, 1.], [0, 1.25]]
     phase_init = [pd_fn(X) for X in X_init]
 
     distance_sampler = DistanceSampler(phase_init, X_init, cfg, save_dir=save_dir)

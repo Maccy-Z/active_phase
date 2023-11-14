@@ -108,28 +108,6 @@ end
 
 
 
-# function compute_proba(
-#     l::MultiClassLikelihood,
-#     μ::Tuple{Vararg{<:AbstractVector{T}}},
-#     σ²::Tuple{Vararg{<:AbstractVector{T}}},
-#     nSamples::Integer=200,
-# ) where {T<:Real}
-#     K = n_class(l) # Number of classes
-#     n = length(μ[1]) # Number of test points
-#     μ = hcat(μ...) # Concatenate means together
-#     μ = [μ[i, :] for i in 1:n] # Create one vector per sample
-#     σ² = hcat(σ²...) # Concatenate variances together
-#     σ² = [σ²[i, :] for i in 1:n] # Create one vector per sample
-#     pred = zeros(T, n, K) # Empty container for the predictions
-#     for i in 1:n
-#         # p = MvNormal(μ[i],sqrt.(abs.(σ²[i])))
-#         # p = MvNormal(μ[i],sqrt.(max.(eps(T),σ²[i]))) #WARNING DO NOT USE VARIANCE
-#         pred[i, :] .= l(μ[i])
-#         # for _ in 1:nSamples
-#         # end
-#     end
-#     return NamedTuple{Tuple(Symbol.(l.class_mapping))}(eachcol(pred))
-# end
 
 function compute_proba_mean(
     l::MultiClassLikelihood,

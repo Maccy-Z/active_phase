@@ -3,6 +3,7 @@ from GP_interface2 import JuliaGP
 import numpy as np
 from matplotlib import pyplot as plt
 
+
 def generate_cluster(center, n_points=100, std_dev=0.5):
     """Generate a cluster of points."""
     return np.random.normal(center, std_dev, (n_points, 2))
@@ -15,7 +16,7 @@ def gen_data():
     clusters, labels = [], []
     for label, coord in enumerate(coords):
         clusters.append(generate_cluster(coord, n_points=n_points_per_cluster))
-        labels.append(np.ones((n_points_per_cluster)) * label + 1)
+        labels.append(np.ones(n_points_per_cluster) * label + 1)
 
     # Combine the datasets
     X = np.vstack(clusters)

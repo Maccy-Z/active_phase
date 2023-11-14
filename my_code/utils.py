@@ -43,10 +43,6 @@ class ObsHolder:
         return np.array(self._obs_pos), np.array(self.obs_phase)
 
     def get_kern_param(self, t=None):
-        if t is None:
-            step = len(self.obs_phase)
-        else:
-            step = t
 
         kern_v, kern_r = self.cfg.kern_var, self.cfg.kern_r
 

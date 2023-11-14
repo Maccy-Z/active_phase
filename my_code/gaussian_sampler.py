@@ -1,12 +1,11 @@
 # import edit_source_files
 import GPy
 import numpy as np
-import time
 import scipy
 
 from utils import ObsHolder, make_grid, to_real_scale, points_within_radius
 from config import Config
-from matplotlib import pyplot as plt
+from jl_interface.GP_interface2 import JuliaGP
 
 np.set_printoptions(precision=2)
 

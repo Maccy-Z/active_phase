@@ -1,8 +1,24 @@
 # jl = Julia(runtime='/home/maccyz/julia-1.9.3/bin/julia')
 from julia import Main
 import numpy as np
+import random
 
 Main.include("./jl_interface/jl_GP_interface.jl")
+
+
+class JuliaGPMaker:
+    def __init__(self, num_Xs, num_samples):
+        num_gaussians = num_Xs * num_samples
+        self.sampler = Main.make_sampler(num_gaussians)
+
+    def JuliaGP(self):
+        # Randomly trigger Julia GC
+        i = random.randint(0, 500)
+        if i == 0:
+            print("GC collect")
+            Main.GC.gc()
+
+        return JuliaGP(self.sampler)
 
 
 class JuliaGP:
@@ -11,12 +27,17 @@ class JuliaGP:
     kern_var: np.ndarray
     kern_lens: np.ndarray
 
-    def __init__(self):
-        self.sampler = None
+    def __init__(self, sampler):
+        self.sampler = sampler
         self.GP = None
 
-    def make_sampler(self, n_gaussians):
-        self.sampler = Main.make_sampler(n_gaussians)
+    # def make_sampler(self, n_gaussians):
+    #     i = random.randint(0, 500)
+    #     if i == 0:
+    #         print("GC collect")
+    #         Main.GC.gc()
+    #
+    #     self.sampler = Main.make_sampler(n_gaussians)
 
     def make_GP(self, X, y, n_class: int, init_sigma: float, init_scale: float, optimiser: str):
         self.X = X
@@ -36,21 +57,18 @@ class JuliaGP:
 
     # Predicts probabilities and std for test data and hidden state
     def pred_proba_sampler(self, X_test, full_cov: bool, model_cov: bool, nSamples: int) -> tuple[tuple, tuple]:
-        if self.sampler is None:
-            if model_cov:
-                self.make_sampler(len(X_test) * nSamples)
-            else:
-                self.make_sampler(0)
+        # if self.sampler is None:
+        #     if model_cov:
+        #         self.make_sampler(len(X_test) * nSamples)
+        #     else:
+        #         self.make_sampler(0)
 
         (probs, p_std), (f_mu, f_var) = Main.pred_proba_sampler(self.GP, X_test, full_cov=full_cov, model_cov=model_cov,
                                                                 nSamples=nSamples, sampler=self.sampler)
         return (probs, p_std), (f_mu, f_var)
 
+
 class JuliaGPHolder:
     def __init__(self):
         self.current_model = None
         self.models = []
-
-
-
-

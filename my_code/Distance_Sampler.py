@@ -4,8 +4,8 @@ from matplotlib import pyplot as plt
 from matplotlib import axes as Axes
 import numpy as np
 
-from gaussian_sampler_jl import suggest_point, suggest_two_points
-from utils import ObsHolder, new_save_folder, tri_pd, bin_pd, quad_pd, CustomScalarFormatter
+from gaussian_sampler_jl import suggest_point
+from utils import ObsHolder, new_save_folder, tri_pd, bin_pd, quad_pd, CustomScalarFormatter, make_grid
 from config import Config
 
 
@@ -69,24 +69,23 @@ class DistanceSampler:
         self.acq_ax.clear()
         self.pd_ax.clear()
 
-        # Reshape 1d array to 2d
+        # Reshape 1d array to 2d and use (y, x) indexing
         side_length = int(np.sqrt(len(pd_old)))
-        pd_old = pd_old.reshape((side_length, side_length))
+        pd_old = pd_old.reshape((side_length, side_length)).T
         side_length = int(np.sqrt(len(avg_dists)))
-        avg_dists = avg_dists.reshape((side_length, side_length))
+        avg_dists = avg_dists.reshape((side_length, side_length)).T
         max_probs = np.amax(pd_probs, axis=1)
         side_length = int(np.sqrt(len(max_probs)))
-        max_probs = max_probs.reshape((side_length, side_length))
+        max_probs = max_probs.reshape((side_length, side_length)).T
 
         # 2d plots require extent as a tuple of 4 numbers
         extent = self.cfg.extent
         extent = tuple(element for inner_tuple in extent for element in inner_tuple)
 
-
         # Plot probability of observaion
         self.p_obs_ax.set_title("Error prob (%)")
         im = self.p_obs_ax.imshow(1 - max_probs, extent=extent,
-                                  origin="lower", vmax=1, vmin=0, aspect='auto')
+                                  origin="lower", vmax=0.5, vmin=0, aspect='auto')
         self._show_cb(im, self.p_obs_ax)
 
         # Plot acquisition function
@@ -137,9 +136,10 @@ def main(save_dir):
     cfg = Config()
 
     # Init observations to start off
-    # X_init, _, _ = make_grid(cfg.N_init, cfg.extent)
-    X_init = [[0.0, 1.], [0, 1.25]]
-    phase_init = [pd_fn(X) for X in X_init]
+    X_init, _  = make_grid(3, cfg.extent)
+    X_init = [[1., 0.5], [1, 1.5]]
+    #X_init = [[1,0.5],[1,1.5],[0.4,1],[1.6,1],[1.4,1.6],[0.4,1.6],[0.4,0.4],[1.6,0.6],[0.8,1.6],[1.2,1.6],[0.6,1.6]]
+    phase_init = [pd_fn(X, train=False) for X in X_init]
 
     distance_sampler = DistanceSampler(phase_init, X_init, cfg, save_dir=save_dir)
 
@@ -152,20 +152,29 @@ def main(save_dir):
 
     distance_sampler.set_plots([axes1, axes2, axes3], fig)
 
-    for i in range(51):
+    for i in range(50):
         print()
         print("Step:", i)
-        new_points, prob = distance_sampler.single_obs()
-        print(f'{new_points =}, {prob = }')
+        new_point, prob = distance_sampler.single_obs()
+
         fig.show()
 
-        new_points = np.array(new_points).reshape(-1, 2)
-        for p in new_points:
-            obs_phase = pd_fn(p)
-            distance_sampler.obs_holder.make_obs(p, obs_phase)
 
+        obs_phase = pd_fn(new_point)
+        distance_sampler.obs_holder.make_obs(new_point, obs_phase)
+        distance_sampler.obs_holder.make_obs(new_point, obs_phase)
+
+        X_obs, phase_obs = distance_sampler.obs_holder.get_og_obs()
+
+        print(X_obs)
+        print(phase_obs)
+        print(f'{new_point =}, {prob = }')
+
+        #
+
+        # exit(2)
 
 if __name__ == "__main__":
-    save_dir = "./saves"
+    save_dir = "/tmp/"
 
     main(save_dir)

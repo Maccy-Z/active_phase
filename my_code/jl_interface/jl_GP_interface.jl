@@ -15,9 +15,9 @@ function make_GP(X::Matrix{Float64}, y::Vector{Int64}; n_class::Int, init_sigma:
     kernel = init_sigma * Matern32Kernel() ∘ ScaleTransform(init_scale)
 
     if optimiser == "ADAM"
-        optimiser = Optimisers.ADAM(0.01)
+        optimiser = Optimisers.ADAM(0.05)
     elseif optimiser == "SGD"
-        optimiser = Optimisers.Descent(0.01)
+        optimiser = Optimisers.Descent(0.02)
     else
         optimiser = nothing
     end

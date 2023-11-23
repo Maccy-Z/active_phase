@@ -6,7 +6,7 @@ simple modules.
 
 This should be run as::
 
-   $ python test.py
+   $ python likelihoods.py
 
 """
 # Author: Prabhu Ramachandran <prabhu_r@users.sf.net>

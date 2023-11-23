@@ -177,7 +177,7 @@ Examples::
 
      mayavi2 test.mv2 (or mayavi2 -z test.mv2)
 
-     mayavi2 test.py (or mayavi2 -x test.py)
+     mayavi2 likelihoods.py (or mayavi2 -x likelihoods.py)
 
      mayavi2 test.mv2 other.mv2 (or mayavi2 -z test.mv2 -z other.mv2)
 

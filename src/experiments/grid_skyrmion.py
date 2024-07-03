@@ -19,12 +19,13 @@ grid = (11, 11, 10)
 
 
 class GridSearch:
-    def __init__(self, full_dimensions=(11, 11, 10), low_res_dimensions=(5, 5, 4)):
+    def __init__(self, full_dimensions=(11, 11, 10), low_res_dimensions=(6, 6, 4)):
         self.extent = np.array(Extent)
 
         self.full_dimensions = np.array(full_dimensions)
         self.low_res_dimensions = np.array(low_res_dimensions)
         self.low_res_total_points = np.prod(low_res_dimensions)
+
         self.full_total_points = np.prod(full_dimensions)
         self.low_res_grid = np.indices(low_res_dimensions).reshape(n_dim, -1).T
         self.full_grid = np.indices(full_dimensions).reshape(n_dim, -1).T
@@ -39,7 +40,8 @@ class GridSearch:
             if self.current_index < self.low_res_total_points:
                 point = self.low_res_grid[self.current_index]
                 self.current_index += 1
-                return self.extent[:, 0] + (self.extent[:, 1] - self.extent[:, 0]) * point / (self.low_res_dimensions-1)
+                pt = self.extent[:, 0] + (self.extent[:, 1] - self.extent[:, 0]) * point / (self.low_res_dimensions - 1)
+                return pt
             else:
                 self.low_res_done = True
                 self.current_index = 0

@@ -19,7 +19,7 @@ grid = (11, 11, 10)
 
 
 class GridSearch:
-    def __init__(self, full_dimensions=(11, 11, 10), low_res_dimensions=(3, 3, 4)):
+    def __init__(self, full_dimensions=(11, 11, 10), low_res_dimensions=(5, 5, 4)):
         self.extent = np.array(Extent)
 
         self.full_dimensions = np.array(full_dimensions)

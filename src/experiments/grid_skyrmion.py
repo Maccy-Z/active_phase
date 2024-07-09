@@ -72,8 +72,8 @@ def suggest_point(Xs, labels):
 
 
 def plot(Xs, labels, new_point, contours, pred_pd):
-    pred_pd = pred_pd[:, :, 5, 0].T
-    mask = (Xs[:, 2] > 0.4) & (Xs[:, 2] < 0.6)
+    pred_pd = pred_pd[:, :, 3, 0].T
+    mask = (Xs[:, 2] > 0.35) & (Xs[:, 2] < 0.45)
     Xs = Xs[mask]
     labels = np.array(labels)[mask]
 
@@ -82,6 +82,7 @@ def plot(Xs, labels, new_point, contours, pred_pd):
 
     plt.scatter(Xs[:, 0], Xs[:, 1], marker="x", s=30, c=labels, cmap='bwr')  # , c=labels, cmap='viridis')
     plt.imshow(pred_pd, extent=(0, 1, 0, 1), origin="lower")  # Phase diagram
+
     if new_point is not None:
         plt.scatter(new_point[0], new_point[1], c='r')
     if contours is not None:
@@ -142,6 +143,7 @@ def main():
 
     print(errors)
     print(len(errors))
+
 
     plot(Xs, labels, None, None, full_pd)
 
